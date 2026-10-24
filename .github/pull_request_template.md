@@ -7,7 +7,7 @@ Closes #
 
 ## Pruebas automáticas
 - [ ] `tests/run_tests.sh` correcto (incluye `py_compile`)
-- [ ] Revisión independiente del diff
+- [ ] Relectura completa del diff, separada de la escritura
 - [ ] Cada llamada nueva al framework contrastada con los scripts de Live 12 y con fallo seguro
 
 ## Pasos manuales para la próxima prueba mínima

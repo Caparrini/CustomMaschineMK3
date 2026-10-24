@@ -36,7 +36,7 @@ Proceso obligatorio para que todo cambio sea trazable: issue → rama → commit
 - Rama desde `develop` actualizado: `feat/<n>-<nombre>`, `fix/<n>-<nombre>`, `docs/<n>-<nombre>`.
 - Commits pequeños, en imperativo, con `(#n)` al final.
 - PR a `develop` con la plantilla; el texto incluye `Closes #n`.
-- Revisión antes de fusionar: pruebas automáticas y una revisión independiente del diff (otra sesión o agente que no haya escrito el código). No requiere tiempo de la persona que prueba.
+- Revisión antes de fusionar: pruebas automáticas y relectura completa del diff contra los scripts de Live 12, en un paso separado de la escritura. No requiere tiempo de la persona que prueba.
 - Fusión con «Squash and merge» para que cada issue sea un commit en `develop`.
 
 ## 3. Registro de trabajo en el issue
