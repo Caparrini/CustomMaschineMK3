@@ -9,7 +9,7 @@ labels: ["tipo: mejora"]
 <!-- Qué problema del directo o del flujo de trabajo resuelve -->
 
 ## Comportamiento esperado
-<!-- Qué control (pad, botón, encoder, Smart Strip) hace qué, en qué modo, y qué muestra la pantalla (4 líneas × 28 caracteres) -->
+<!-- Qué control (pad, botón, encoder, tira táctil) hace qué, en qué modo, y qué muestra la pantalla (4 líneas × 28 caracteres) -->
 
 ## Criterios de aceptación
 - [ ] 

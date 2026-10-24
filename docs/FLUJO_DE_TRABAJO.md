@@ -8,32 +8,35 @@ Proceso obligatorio para que todo cambio sea trazable: issue → rama → commit
 | --- | --- | --- |
 | Backlog | Se crea el issue con plantilla | Cumple la definición de preparado |
 | Preparado | Tiene criterios de aceptación comprobables | Alguien lo asigna y crea la rama |
-| En curso | Existe rama y primer commit | Se abre PR a `develop` |
-| En pruebas | PR abierto | Pruebas registradas y superadas |
-| Hecho | PR fusionado en `develop` | — |
+| En curso | Existe rama y primer commit | El PR se fusiona en `develop` tras pruebas automáticas y revisión |
+| En pruebas | PR fusionado; falta la prueba mínima de la versión candidata | Prueba mínima superada con los pasos específicos del PR |
+| Hecho | Prueba mínima superada, o cambio solo de documentación fusionado | — |
+| Descartado | Ya resuelto en el original, no viable o sustituido; el motivo queda en el issue | — |
 | Enviado upstream | PR abierto en el original | El original lo fusiona o lo rechaza |
 
 ### Definición de preparado
 
 - Contexto: qué problema del directo resuelve.
 - Comportamiento esperado concreto: qué control hace qué y qué muestra la pantalla (4 líneas × 28 caracteres).
-- Criterios de aceptación comprobables a mano.
+- Criterios de aceptación comprobables, automáticamente siempre que sea posible.
 - Fase y prioridad asignadas.
 
 ### Definición de terminado
 
-- Criterios de aceptación superados y registrados en el issue.
-- Checklist de regresión ejecutada sin fallos.
-- `python3 -m py_compile CustomMaschineMK3/*.py` sin errores.
+- Criterios de aceptación cubiertos: por pruebas automáticas (`tests/`) siempre que se pueda, y por pasos manuales solo cuando dependen de Live o del hardware.
+- `tests/run_tests.sh` sin errores (incluye `py_compile` de todo el script).
+- Pasos manuales del cambio (como mucho 3) escritos en el PR, para la siguiente prueba mínima.
 - `CHANGELOG.md` actualizado si cambia el comportamiento.
 - `docs/DECISIONES.md` actualizado si hubo decisión de diseño.
-- PR revisado y fusionado; issue cerrado por el PR.
+- `docs/FUNCIONES.md` actualizado si cambia o se añade una función.
+- PR fusionado en `develop`. El issue pasa a «En pruebas» si tiene pasos manuales, o a «Hecho» si no los tiene.
 
 ## 2. Ramas y commits
 
 - Rama desde `develop` actualizado: `feat/<n>-<nombre>`, `fix/<n>-<nombre>`, `docs/<n>-<nombre>`.
 - Commits pequeños, en imperativo, con `(#n)` al final.
 - PR a `develop` con la plantilla; el texto incluye `Closes #n`.
+- Revisión antes de fusionar: pruebas automáticas y una revisión independiente del diff (otra sesión o agente que no haya escrito el código). No requiere tiempo de la persona que prueba.
 - Fusión con «Squash and merge» para que cada issue sea un commit en `develop`.
 
 ## 3. Registro de trabajo en el issue
@@ -45,26 +48,29 @@ Un comentario por sesión de trabajo:
 - **Hecho:** …
 - **Pendiente:** …
 - **Commit probado:** <hash corto>
-- **Entorno:** SO …, Live 12.x.x, firmware/driver NI …
-- **Pruebas:**
-  - [x] Caso 1 — correcto
-  - [ ] Caso 2 — fallo: <descripción> (extracto del log abajo)
+- **Entorno:** SO …, Live 12.x.x (solo si hubo prueba manual)
+- **Pruebas automáticas:** `tests/run_tests.sh` correcto / fallo
+- **Prueba manual:** no aplica / P1–P6 correctos / `P4 fallo: …` (con `Log.txt` adjunto)
 - **Decisiones tomadas:** ninguna / ADR-NNN
 ```
 
 ## 4. Pruebas
 
-No hay pruebas automáticas: las librerías de Live solo existen dentro de Live.
+Principio (ADR-007): el tiempo de quien prueba con el hardware es el recurso más caro del proyecto. Todo lo verificable sin Live se verifica antes; la prueba manual se reduce al mínimo y se agrupa.
 
-1. **Carga:** copiar `CustomMaschineMK3/` a `User Library/Remote Scripts/`, abrir Live, seleccionar la superficie de control. Revisar `Log.txt` de Live y, con `Config.LOGGING = True`, `CustomMaschineMK3.log`.
-2. **Funcional:** criterios de aceptación del issue sobre el proyecto de pruebas del repositorio.
-3. **Regresión:** checklist completa de funciones existentes (se crea en el issue de línea base y se guarda en `docs/pruebas/`).
-4. **Estrés:** 30 minutos de uso continuo cambiando modos, dispositivos y escenas sin reiniciar Live.
-5. **Ensayo:** solo para pasar a `live-stable`; una sesión real con la banda.
+1. **Automáticas (Claude, en cada PR):** `tests/run_tests.sh <scripts de Live descompilados>`. Compila todo el script y ejecuta la lógica contra el código de bancos de Live. Ver `tests/README.md`.
+2. **Revisión estática (Claude, en cada PR):** cada llamada nueva al framework se contrasta con los scripts descompilados de Live 12; el código que toca el framework falla de forma segura (registra el error y conserva el comportamiento original).
+3. **Prueba mínima (manual, una vez por versión candidata):** `docs/pruebas/PRUEBA_MINIMA.md`, menos de 5 minutos, más los pasos específicos de los PR acumulados. Solo se anotan los fallos.
+4. **Ensayo:** el uso normal en un ensayo de la banda valida la versión antes de pasar a `live-stable`. No requiere pasos adicionales.
+
+Cambios solo de documentación: no necesitan prueba manual y se fusionan directamente.
+
+`docs/FUNCIONES.md` es el inventario de funciones con IDs `R-xxx`; no se ejecuta completo.
 
 ## 5. Versiones
 
 - `develop` no se etiqueta.
+- Versión candidata: el commit de `develop` que se instala para la prueba mínima. Se anota en el registro de los issues «En pruebas».
 - Cada merge a `live-stable` se etiqueta `live-AAAA.MM.DD` y se mueve la sección «Sin publicar» de `CHANGELOG.md` a esa versión.
 
 ## 6. Sincronización con el original
@@ -82,7 +88,7 @@ Frecuencia mínima: mensual, y siempre antes de preparar un PR al original.
 
 1. Proponer la mejora en un issue del original.
 2. Rama desde `main` sincronizado: `upstream/<nombre>`.
-3. Llevar solo el código general (sin `docs/`, `CLAUDE.md`, `CHANGELOG.md` ni configuración de la banda).
+3. Llevar solo el código general (sin `docs/`, `CLAUDE.md`, `CHANGELOG.md`, `tests/` ni `plugin_banks.json` de la banda).
 4. PR en inglés con descripción y pruebas.
 5. El issue del fork pasa a «Enviado upstream» con enlace al PR.
 

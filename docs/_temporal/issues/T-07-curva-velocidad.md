@@ -1,10 +1,19 @@
 # T-07 · [F3] Curva de velocidad configurable de los pads
 
-- **Estado:** Backlog
+- **Estado:** Descartado
 - **Fase:** 3 · **Prioridad:** 2
 - **Etiquetas:** tipo: mejora, upstream: candidata
 - **Rama:** —
 - **Issue de GitHub:** pendiente de migrar
+
+## Resolución
+No resoluble en el script. En los modos de teclado los pads se tocan en modo «playable»: Live recibe las notas directamente y el script no interviene en la velocidad (`MaschinePlayableComponent` solo traduce nota y canal). No se conoce en la API de remote scripts una forma de reescribir la velocidad de esas notas.
+
+Alternativas sin desarrollo:
+- Efecto MIDI **Velocity** de Live delante del instrumento, para subir el rango de salida.
+- Velocidad fija: CHORDS (16 niveles) o FIXED VEL (acento a 127), ya disponibles.
+
+Usuarios del foro de NI informan de que ni la sensibilidad máxima ni la curva «soft» resuelven el problema en modo MIDI; la única solución publicada usa la presión de los pads mediante scripting en FL Studio, no aplicable a Live.
 
 ## Contexto
 En modo MIDI la respuesta de los pads es peor que con el software Maschine.
