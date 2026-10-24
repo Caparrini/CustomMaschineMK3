@@ -13,6 +13,10 @@ Idioma de trabajo: castellano (España) en issues, commits, documentación y com
 | `docs/DECISIONES.md` | Decisiones de diseño vigentes (ADR). No contradecir una decisión aceptada sin abrir una nueva que la sustituya |
 | `CHANGELOG.md` | Cambios por versión |
 
+## Provisional: seguimiento sin GitHub Issues
+
+Mientras los issues no estén activos en el fork, los issues son los archivos de `docs/_temporal/issues/` (`T-NN`) y el tablero es `docs/_temporal/TABLERO.md`. En las reglas siguientes, «issue» equivale a `T-NN`, `#n` a `T-NN` y «comentario de registro» a una entrada en la sección «Registro de trabajo» del archivo. Detalle en `docs/_temporal/README.md`. Esta sección se elimina al migrar.
+
 ## Reglas obligatorias
 
 1. **Ningún cambio sin issue.** Si la tarea no tiene issue, se crea primero con la plantilla correspondiente.
