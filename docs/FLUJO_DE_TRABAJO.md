@@ -16,7 +16,7 @@ Proceso obligatorio para que todo cambio sea trazable: issue → rama → commit
 
 ### Definición de preparado
 
-- Contexto: qué problema del directo resuelve.
+- Contexto: qué problema del flujo de trabajo o del directo resuelve.
 - Comportamiento esperado concreto: qué control hace qué y qué muestra la pantalla (4 líneas × 28 caracteres).
 - Criterios de aceptación comprobables, automáticamente siempre que sea posible.
 - Fase y prioridad asignadas.
@@ -25,7 +25,7 @@ Proceso obligatorio para que todo cambio sea trazable: issue → rama → commit
 
 - Criterios de aceptación cubiertos: por pruebas automáticas (`tests/`) siempre que se pueda, y por pasos manuales solo cuando dependen de Live o del hardware.
 - `tests/run_tests.sh` sin errores (incluye `py_compile` de todo el script).
-- Pasos manuales del cambio (como mucho 3) escritos en el PR, para la siguiente prueba mínima.
+- Pasos manuales del cambio (como mucho 3) escritos en el PR y añadidos a `docs/pruebas/VERSION_CANDIDATA.md`.
 - `CHANGELOG.md` actualizado si cambia el comportamiento.
 - `docs/DECISIONES.md` actualizado si hubo decisión de diseño.
 - `docs/FUNCIONES.md` actualizado si cambia o se añade una función.
@@ -71,7 +71,7 @@ Cambios solo de documentación: no necesitan prueba manual y se fusionan directa
 
 - `develop` no se etiqueta.
 - Versión candidata: el commit de `develop` que se instala para la prueba mínima. Se anota en el registro de los issues «En pruebas».
-- Cada merge a `live-stable` se etiqueta `live-AAAA.MM.DD` y se mueve la sección «Sin publicar» de `CHANGELOG.md` a esa versión.
+- Cada merge a `live-stable` se etiqueta `live-AAAA.MM.DD`, se mueve la sección «Sin publicar» de `CHANGELOG.md` a esa versión y se vacía `docs/pruebas/VERSION_CANDIDATA.md`.
 
 ## 6. Sincronización con el original
 
@@ -97,7 +97,7 @@ Frecuencia mínima: mensual, y siempre antes de preparar un PR al original.
 | Etiqueta | Uso |
 | --- | --- |
 | `tipo: mejora` / `tipo: fallo` / `tipo: documentación` / `tipo: prueba` | Naturaleza del issue |
-| `prioridad: 1` / `prioridad: 2` / `prioridad: 3` | 1 = necesaria para el directo |
+| `prioridad: 1` / `prioridad: 2` / `prioridad: 3` | 1 = imprescindible para el uso diario (producción o directo) |
 | `fase: 0` … `fase: 4` | Fase del plan |
 | `upstream: candidata` | Mejora aportable al original |
 | `bloqueado` | Depende de otro issue o de información externa |

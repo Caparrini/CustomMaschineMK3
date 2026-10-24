@@ -1,6 +1,6 @@
 # Prueba mínima
 
-Única prueba manual obligatoria antes de llevar una versión al directo. Objetivo: menos de 5 minutos. Se hace una vez por versión candidata, no por cada cambio: una sesión valida todos los PR acumulados.
+Única prueba manual obligatoria antes de dar por buena una versión. Objetivo: menos de 5 minutos. Se hace una vez por versión candidata, no por cada cambio: una sesión valida todos los PR acumulados.
 
 Solo hay que anotar lo que falle. Si todo va bien, basta con escribir «Prueba mínima correcta» y el commit en el issue o PR.
 
@@ -9,7 +9,7 @@ Solo hay que anotar lo que falle. Si todo va bien, basta con escribir «Prueba m
 1. Cerrar Live.
 2. Copiar la carpeta `CustomMaschineMK3` del repositorio encima de la instalada en `User Library/Remote Scripts/`, fusionando. Si se sustituye la carpeta entera, se pierden los ajustes del modo SETTINGS (`settings.json`).
 3. MK3 en modo MIDI (SHIFT + botón MASCHINE).
-4. Abrir Live con un proyecto real de la banda que tenga al menos un Simpler o un instrumento y un plug-in.
+4. Abrir Live con un proyecto real que tenga al menos un Simpler o un instrumento, un plug-in VST/AU y varias escenas.
 
 ## Pasos
 
@@ -21,7 +21,7 @@ Solo hay que anotar lo que falle. Si todo va bien, basta con escribir «Prueba m
 | P4 | PLUG-IN y girar un encoder | El parámetro cambia en Live y en la pantalla |
 | P5 | ▶ en modo PLUG-IN | Cambia el banco y la pantalla muestra su nombre 1,5 s |
 | P6 | SCENE + ▶ dos veces | Se lanzan las dos escenas siguientes a la seleccionada y la pantalla muestra «Scene N» y su nombre |
-| P7 | Pasos específicos que indique el PR o la versión, si los hay | Los que indique |
+| P7 | Pasos de `docs/pruebas/VERSION_CANDIDATA.md`, si los hay | Los que indique |
 
 ## Si algo falla
 

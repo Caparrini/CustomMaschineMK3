@@ -15,3 +15,4 @@ Actualizar en el mismo commit que cambie el estado en el archivo del issue.
 | [T-09](issues/T-09-config-banda.md) | [F1] Configuración específica de la banda separada del código general | 1 | 1 | En pruebas | `feat/T-03-bancos-vst` (junto con T-03) |
 | [T-10](issues/T-10-upstream.md) | [F4] Seguimiento de contribuciones al repositorio original | 4 | 3 | Backlog | — |
 | [T-11](issues/T-11-pruebas-minimas.md) | [F0] Pruebas manuales mínimas y coherencia de la documentación | 0 | 1 | Hecho | `docs/T-11-pruebas-minimas` |
+| [T-12](issues/T-12-produccion.md) | [F2] Funciones de flujo de trabajo y creatividad | 2 | 2 | En pruebas | `feat/T-12-produccion` |

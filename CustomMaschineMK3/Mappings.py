@@ -197,7 +197,8 @@ def create_mappings(surface):
                     scene_launch_buttons = "column3_pads_with_scene",
                     select_button = "select",
                     delete_button = "erase",
-                    copy_button = "duplicate"),
+                    copy_button = "duplicate",
+                    scene_duplicate_button = "duplicate"),
                 dict(component = "View_Based_Recording",
                     fixed_button = "pattern",
                     length_select_buttons = "group_buttons_with_pattern"),
@@ -357,12 +358,18 @@ def create_mappings(surface):
         ),
         browser = dict(
             behaviour = ToggleBehaviour(),
-            component = "Browser",
-            preview_toggle_button = "track_buttons_with_macro_raw[0]",
-            preview_volume_encoder = "knobs_raw[0]",
-            select_folder_buttons = "track_buttons",
-            hotswap_button = "variation",
-            hotswap_content_button = "variation_with_select"
+            modes = [
+                dict(component = "Browser",
+                    preview_toggle_button = "track_buttons_with_macro_raw[0]",
+                    preview_volume_encoder = "knobs_raw[0]",
+                    select_folder_buttons = "track_buttons",
+                    hotswap_button = "variation",
+                    hotswap_content_button = "variation_with_select"),
+                # Tempo while auditioning samples: encoder 2 in 1 BPM steps, encoder 3 in 0.1 BPM steps
+                dict(component = "Transport",
+                    tempo_coarse_encoder = "knobs_raw[1]",
+                    tempo_fine_encoder = "knobs_raw[2]"),
+            ]
         ),
         settings = dict(
             behaviour = ToggleBehaviour(),
@@ -461,6 +468,10 @@ def create_mappings(surface):
 
     mappings["Group_Button_Mode_Control"] = dict(
         notes_button = "notes"
+    )
+
+    mappings["Device_Window"] = dict(
+        toggle_button = "plugin_with_shift",
     )
 
     mappings["Scene_Launch"] = dict(

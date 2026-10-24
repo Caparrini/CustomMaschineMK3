@@ -198,6 +198,13 @@ class Notifications(DefaultNotifications):
         select = lambda note: f"Note {pitch_index_to_string(note, PITCH_NAMES)}\nselected"
         select: "Notification[Fn[int]]"
 
+    class DeviceWindow:
+        window = lambda name, state: f"{name[:LCD_LINE_LENGTH]}\nwindow {state}"
+        window: "Notification[Fn[str, str]]"
+        chain = lambda name: f"{name[:LCD_LINE_LENGTH]}\nshown in device view"
+        chain: "Notification[Fn[str]]"
+        no_device = "No device selected"
+
     class SceneLaunch:
         launch = lambda number, name: f"Scene {number}\n{name[:LCD_LINE_LENGTH]}"
         launch: "Notification[Fn[int, str]]"
@@ -351,6 +358,9 @@ def create_root_view():
                 if liveobj_valid(parameter):
                     content.lines[0] = "Preview Volume"
                     content.lines[2] = get_display_value(parameter)
+            elif index in (1, 2):
+                content.lines[0] = "Song Tempo" if index == 1 else "Song Tempo (fine)"
+                content.lines[2] = f"{state.transport.song_tempo:.2f} BPM"
 
         if TOUCH_STATES.encoder_active:
             encoder_mode = state.encoder_modes.selected_mode

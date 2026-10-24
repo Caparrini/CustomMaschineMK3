@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/). S
 ## [Sin publicar]
 
 ### Añadido
+- SHIFT + PLUG-IN abre y cierra la ventana del plug-in seleccionado; DUPLICATE + SCENE + pad duplica una escena; encoders 2 y 3 cambian el tempo en el navegador (T-12, ADR-009).
 - SCENE + ▶ / ◀ lanzan la escena siguiente / anterior a la última lanzada, también tras Follow Actions; pedal opcional para pasar de escena (ajuste «Pedal Function») (T-04, ADR-008).
 - Guía de uso en directo `docs/DIRECTO.md`.
 - Prueba estática de coherencia entre `Mappings.py` y `ControlElements.py`.

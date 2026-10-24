@@ -6,7 +6,7 @@ labels: ["tipo: mejora"]
 ---
 
 ## Contexto
-<!-- Qué problema del directo o del flujo de trabajo resuelve -->
+<!-- Qué problema del flujo de trabajo, la creatividad o el directo resuelve -->
 
 ## Comportamiento esperado
 <!-- Qué control (pad, botón, encoder, tira táctil) hace qué, en qué modo, y qué muestra la pantalla (4 líneas × 28 caracteres) -->

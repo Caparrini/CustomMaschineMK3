@@ -86,7 +86,7 @@ Columna **Fuente**: `M` = verificado en el código (`Mappings.py` y componentes)
 | R-409 | SHIFT + inclinar el encoder | Mueve el recuadro una página (4 pistas o escenas) | M |
 | R-410 | Grupos A–H | Mueve el recuadro dentro de la matriz 16×8 (vista general de sesión) | M |
 
-### 4.1 Escenas para el directo (T-04, en cualquier modo)
+### 4.1 Escenas (T-04 y T-12, en cualquier modo)
 
 | ID | Control | Resultado esperado | Fuente |
 | --- | --- | --- | --- |
@@ -94,6 +94,9 @@ Columna **Fuente**: `M` = verificado en el código (`Mappings.py` y componentes)
 | R-412 | SCENE + ◀ | Igual, con la escena anterior | M |
 | R-413 | Sin escena en esa dirección | No lanza nada y muestra «No next scene» o «No previous scene» | M |
 | R-414 | Pedal, con el ajuste «Pedal Function» en «Next Scene» | Cada pisada lanza la escena siguiente, como R-411; pisadas a menos de 0,3 s se cuentan como una | M |
+| R-415 | DUPLICATE + SCENE + pad 4, 8, 12 o 16 | Duplica esa escena (T-12) | M |
+| R-416 | ERASE + SCENE + pad 4, 8, 12 o 16 | Borra esa escena (ya en el original) | M |
+| R-417 | SELECT + SCENE + pad 4, 8, 12 o 16 | Selecciona esa escena sin lanzarla (ya en el original) | M |
 
 ## 5. Modos de teclado (KEYBOARD)
 
@@ -228,6 +231,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1016 | Cambiar de dispositivo o de banco | Notificación de 1,5 s con el nombre del dispositivo o del banco | M |
 | R-1017 | Plug-in VST/AU con entrada en `plugin_banks.json` | Bancos con los nombres y parámetros del archivo; ◀ / ▶ y MACRO + botones los recorren (T-03) | M |
 | R-1018 | Seleccionar un plug-in VST/AU | Se escribe `plugin_parameters/<nombre>.txt` en la carpeta del script con los parámetros que Live expone (T-03) | M |
+| R-1019 | SHIFT + PLUG-IN | Abre o cierra la ventana del plug-in seleccionado; con un dispositivo de Live, muestra la vista de dispositivos. La pantalla lo confirma (T-12) | M |
 
 ## 11. Tira táctil
 
@@ -266,6 +270,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1307 | MACRO + botón 1 / encoder 1 | Activa la previsualización / volumen de previsualización | M |
 | R-1308 | VARIATION | Hot-swap del dispositivo seleccionado | M |
 | R-1309 | SELECT + VARIATION | Hot-swap del sample o pad (Simpler o Drum Rack seleccionado) | M |
+| R-1310 | Encoder 2 / encoder 3 | Tempo en pasos de 1 / 0,1 BPM sin salir del navegador; al tocarlos, la pantalla muestra el tempo (T-12) | M |
 
 ## 14. Mapeo MIDI personalizado (CHANNEL)
 
