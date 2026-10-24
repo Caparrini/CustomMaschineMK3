@@ -15,7 +15,7 @@ Carpeta provisional mientras los issues y el tablero de GitHub no estén activos
 ## Migración a GitHub
 
 1. Activar Issues en el fork y crear el Project con auto-añadido (`is:issue`).
-2. Crear los issues en orden T-01 … T-10 para que el número de GitHub coincida (`T-03` → `#3`), con etiquetas e hito de fase.
+2. Crear los issues en orden T-01 … T-10 con etiquetas e hito de fase. Los números de GitHub no coincidirán con `T-NN`, porque issues y PR comparten numeración y ya existen PR; anotar la correspondencia en una tabla en este README antes de borrarlo.
 3. Copiar el registro de trabajo de cada archivo como primer comentario del issue.
-4. Sustituir referencias `T-NN` por `#NN` en documentación y plantillas.
+4. Sustituir cada referencia `T-NN` por su `#n` según esa tabla en documentación y plantillas.
 5. Eliminar esta carpeta y la sección provisional de `CLAUDE.md` en un único commit.
