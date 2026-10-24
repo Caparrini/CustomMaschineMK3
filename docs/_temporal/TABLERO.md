@@ -4,7 +4,7 @@ Actualizar en el mismo commit que cambie el estado en el archivo del issue.
 
 | ID | Título | Fase | Prioridad | Estado | Rama |
 | --- | --- | --- | --- | --- | --- |
-| [T-01](issues/T-01-linea-base.md) | [F0] Línea base: inventario de funciones y checklist de regresión | 0 | 1 | Backlog | — |
+| [T-01](issues/T-01-linea-base.md) | [F0] Línea base: inventario de funciones y checklist de regresión | 0 | 1 | En pruebas | `docs/T-01-linea-base` |
 | [T-02](issues/T-02-proyecto-pruebas.md) | [F0] Proyecto de Live de pruebas reproducible | 0 | 1 | Backlog | — |
 | [T-03](issues/T-03-bancos-vst.md) | [F1] Bancos de parámetros para los VST del directo | 1 | 1 | Backlog | — |
 | [T-04](issues/T-04-mapeo-directo.md) | [F1] Mapeo de botones para el directo | 1 | 1 | Backlog | — |

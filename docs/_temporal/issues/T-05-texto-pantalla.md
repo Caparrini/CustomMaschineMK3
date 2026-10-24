@@ -9,6 +9,9 @@
 ## Contexto
 La pantalla admite 4 líneas de 28 caracteres (ADR-006). Hay que aprovecharla para no mirar el ordenador.
 
+## Hallazgo de T-01 (2026-10-24)
+El modo dispositivo ya muestra en pantalla nombres abreviados y valores de los 8 parámetros, y el nombre completo y valor al tocar un encoder (`DisplayDefinitions.py`, `device_view` y `knob_control_view`). Lo que falta es identificar el dispositivo y el banco. El alcance de este issue se reduce a eso salvo que la banda pida otra cosa.
+
 ## Comportamiento esperado
 En modo dispositivo: nombre del dispositivo y página, y nombres y valores de los 8 parámetros, abreviados de forma legible.
 
