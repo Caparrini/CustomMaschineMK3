@@ -39,7 +39,8 @@ class SceneLaunchComponent(Component, Renderable):
     def __init__(self, name = "Scene_Launch", session_ring = None, *a, **k):
         super().__init__(name, *a, **k)
         self._session_ring = session_ring
-        self._last_triggered_index = None
+        # The scene object, not its index: inserting or moving scenes keeps it valid.
+        self._last_triggered_scene = None
         self._pedal = PedalEdgeDetector()
         self._on_scenes_changed.subject = self.song
         self._on_scenes_changed()
@@ -58,13 +59,12 @@ class SceneLaunchComponent(Component, Renderable):
             self._launch_relative(1)
 
     def _reference_index(self):
-        if self._last_triggered_index is not None:
-            return self._last_triggered_index
         scenes = list(self.song.scenes)
-        selected = self.song.view.selected_scene
-        for index, scene in enumerate(scenes):
-            if scene == selected:
-                return index
+        for reference in (self._last_triggered_scene, self.song.view.selected_scene):
+            if liveobj_valid(reference):
+                for index, scene in enumerate(scenes):
+                    if scene == reference:
+                        return index
         return None
 
     def _launch_relative(self, step):
@@ -76,9 +76,9 @@ class SceneLaunchComponent(Component, Renderable):
                 return
             scene = scenes[index]
             scene.fire()
-            # Fired scenes become triggered, which also updates _last_triggered_index; set it
+            # Fired scenes become triggered, which also updates _last_triggered_scene; set it
             # here as well so two fast presses advance two scenes.
-            self._last_triggered_index = index
+            self._last_triggered_scene = scene
             self.song.view.selected_scene = scene
             self._show_scene_in_ring(index)
             self.notify(self.notifications.SceneLaunch.launch, index + 1, scene.name)
@@ -96,13 +96,8 @@ class SceneLaunchComponent(Component, Renderable):
     @listens("scenes")
     def _on_scenes_changed(self):
         self._on_scene_triggered.replace_subjects(list(self.song.scenes))
-        if self._last_triggered_index is not None and self._last_triggered_index >= len(self.song.scenes):
-            self._last_triggered_index = None
 
     @listens_group("is_triggered")
     def _on_scene_triggered(self, scene):
         if liveobj_valid(scene) and scene.is_triggered:
-            for index, candidate in enumerate(self.song.scenes):
-                if candidate == scene:
-                    self._last_triggered_index = index
-                    break
+            self._last_triggered_scene = scene

@@ -46,6 +46,6 @@ Parcial
 ### Registro 2026-10-24
 - **Hecho:** `SceneLaunchComponent.py`, `SceneLaunchLogic.py`, combinaciones SCENE + ◀ / ▶ en `ControlElements.py`, mapeo y ajuste «Pedal Function» (`Mappings.py`, `SettingsComponent.py`), notificación en `DisplayDefinitions.py`, ADR-008, `docs/DIRECTO.md`, R-411 a R-414.
 - **Verificación:** `Scene.fire`, `is_triggered`, `song.view.selected_scene`, `SessionRingComponent.set_offsets`, `InputControl`, `Renderable.notify` y `add_modified_control` contrastados con los scripts de Live 12. Todo el lanzamiento está protegido: un error se registra y no afecta al resto.
-- **Pruebas automáticas:** `tests/run_tests.sh` correcto, 34 pruebas (14 de escenas, 3 de mapeos).
+- **Pruebas automáticas:** `tests/run_tests.sh` correcto, 35 pruebas (15 de escenas, 3 de mapeos).
 - **Pendiente:** P6 de la prueba mínima. El pedal solo se prueba si la banda lo activa.
 - **Decisiones tomadas:** ADR-008

@@ -191,6 +191,16 @@ class ComponentTests(unittest.TestCase):
         component._on_next_scene_button_pressed(None)
         self.assertEqual(song.scenes[0].fired, 0)
 
+    def test_reference_survives_inserted_scenes(self):
+        component, song = make_component()
+        song.scenes[2].is_triggered = True
+        component._on_scene_triggered(song.scenes[2])
+        song.scenes.insert(0, FakeScene("New"))
+        component._on_scenes_changed()
+        component._on_next_scene_button_pressed(None)
+        self.assertEqual(song.scenes[4].fired, 1)
+        self.assertEqual(song.scenes[4].name, "S4")
+
     def test_empty_set(self):
         component, song = make_component(count = 0)
         component._on_next_scene_button_pressed(None)
