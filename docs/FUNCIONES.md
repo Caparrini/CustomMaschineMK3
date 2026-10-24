@@ -86,6 +86,15 @@ Columna **Fuente**: `M` = verificado en el código (`Mappings.py` y componentes)
 | R-409 | SHIFT + inclinar el encoder | Mueve el recuadro una página (4 pistas o escenas) | M |
 | R-410 | Grupos A–H | Mueve el recuadro dentro de la matriz 16×8 (vista general de sesión) | M |
 
+### 4.1 Escenas para el directo (T-04, en cualquier modo)
+
+| ID | Control | Resultado esperado | Fuente |
+| --- | --- | --- | --- |
+| R-411 | SCENE + ▶ | Lanza la escena siguiente a la última lanzada (por la MK3, el ratón o una Follow Action); antes del primer lanzamiento, la siguiente a la seleccionada. La selecciona, mueve el recuadro si hace falta y muestra «Scene N» y su nombre 1,5 s | M |
+| R-412 | SCENE + ◀ | Igual, con la escena anterior | M |
+| R-413 | Sin escena en esa dirección | No lanza nada y muestra «No next scene» o «No previous scene» | M |
+| R-414 | Pedal, con el ajuste «Pedal Function» en «Next Scene» | Cada pisada lanza la escena siguiente, como R-411; pisadas a menos de 0,3 s se cuentan como una | M |
+
 ## 5. Modos de teclado (KEYBOARD)
 
 La selección del submodo es automática según el dispositivo de la pista.
@@ -277,7 +286,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1503 | Encoder 1 | Cambia el valor de la opción | M |
 | R-1504 | Cerrar y reabrir Live | Los ajustes persisten (`settings.json` en la carpeta del script) | M |
 
-Opciones y valores por defecto: selección automática de velocidad de repetición (desactivada), velocidades de repetición A–H (1/4, 1/8, 1/16, 1/32, 1/4T, 1/8T, 1/16T, 1/32T), estilo de secuenciador (Maschine, requiere recarga), modo de mezclador (8Track, requiere recarga), versión (1.4).
+Opciones y valores por defecto: selección automática de velocidad de repetición (desactivada), velocidades de repetición A–H (1/4, 1/8, 1/16, 1/32, 1/4T, 1/8T, 1/16T, 1/32T), estilo de secuenciador (Maschine, requiere recarga), función del pedal (Sustain; «Next Scene» para R-414; requiere recarga), modo de mezclador (8Track, requiere recarga), versión (1.4).
 
 ## 16. Pantalla
 

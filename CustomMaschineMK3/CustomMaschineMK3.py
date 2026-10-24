@@ -83,6 +83,7 @@ from .CustomTransportComponent import CustomTransportComponent
 from .SettingsComponent import SettingsRepository, SettingsComponent
 from .CustomClipSlotComponent import LEDBlinker, CustomClipSlotComponent
 from .PageableBackgroundComponent import PageableBackgroundComponent
+from .SceneLaunchComponent import SceneLaunchComponent
 
 from .Logger import logger
 from . import Config
@@ -144,6 +145,7 @@ class Specification(ControlSurfaceSpecification):
         "Maschine_Playable": MaschinePlayableComponent,
         "Misc_Control": MiscControlComponent,
         "Device_Navigation": CustomDeviceNavigationComponent,
+        "Scene_Launch": SceneLaunchComponent,
     }
     parameter_bank_definitions = CUSTOM_BANK_DEFINITIONS
 

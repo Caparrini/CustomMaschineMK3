@@ -20,7 +20,8 @@ Solo hay que anotar lo que falle. Si todo va bien, basta con escribir «Prueba m
 | P3 | Seleccionar una pista con instrumento, KEYBOARD y tocar pads | Suena el instrumento |
 | P4 | PLUG-IN y girar un encoder | El parámetro cambia en Live y en la pantalla |
 | P5 | ▶ en modo PLUG-IN | Cambia el banco y la pantalla muestra su nombre 1,5 s |
-| P6 | Pasos específicos que indique el PR o la versión | Los que indique |
+| P6 | SCENE + ▶ dos veces | Se lanzan las dos escenas siguientes a la seleccionada y la pantalla muestra «Scene N» y su nombre |
+| P7 | Pasos específicos que indique el PR o la versión, si los hay | Los que indique |
 
 ## Si algo falla
 

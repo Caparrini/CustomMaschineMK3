@@ -8,12 +8,12 @@
 
 ## Estado de los criterios (2026-10-24)
 - [x] `class_name` verificado en los scripts de Live: `PluginDevice` (VST) y `AuPluginDevice` (AU), registrado en ADR-005. No hace falta comprobarlo en Live.
-- [ ] Banco funcional para los VST del directo: el mecanismo está hecho; faltan los nombres de parámetros (pasos 1–3 de `docs/BANCOS_DE_PLUGINS.md`).
+- [x] Banco funcional para los VST del directo: ordenando los parámetros con Configure en Live, sin datos de la banda; con nombres de página, mediante `plugin_banks.json` (opcional).
 - [x] Parámetro no expuesto: deja el encoder vacío sin error (cubierto por prueba automática).
 - [x] Documentado cómo exponer parámetros: `docs/BANCOS_DE_PLUGINS.md`.
 
 ## Pasos manuales para la próxima prueba mínima
-1. En modo PLUG-IN, seleccionar cada plug-in del directo: aparece `plugin_parameters/<nombre>.txt` en la carpeta del script. Enviar esos archivos.
+Ninguno aparte de P4 y P5. La forma recomendada de preparar un plug-in es ordenar sus parámetros con Configure en Live, sin archivos (`docs/BANCOS_DE_PLUGINS.md`); `plugin_banks.json` es opcional y solo se probará si la banda lo usa.
 
 ## Contexto
 Los bancos personalizados solo existen para dispositivos nativos (Simpler, Wavetable, EQ Eight, Hybrid Reverb, Meld). Para los VST del directo los encoders siguen el orden de parámetros que expone Live, poco útil para tocar.

@@ -10,13 +10,21 @@
 
 # Minimal stand-ins for the parts of ableton.v2.base used by the banking code.
 class _Listener:
-    def __init__(self): self.subject = None
-    def replace_subjects(self, subjects): self.subjects = list(subjects)
+    # Bound listener: callable like the decorated method, with subject(s) like Live's.
+    def __init__(self, fn, obj):
+        self.fn = fn
+        self.obj = obj
+        self.subject = None
+        self.subjects = []
+    def __call__(self, *a, **k):
+        return self.fn(self.obj, *a, **k)
+    def replace_subjects(self, subjects):
+        self.subjects = list(subjects)
 class _ListenDescriptor:
     def __init__(self, fn): self.fn = fn; self.name = '_listener_' + fn.__name__
     def __get__(self, obj, owner):
         if obj is None: return self
-        if self.name not in obj.__dict__: obj.__dict__[self.name] = _Listener()
+        if self.name not in obj.__dict__: obj.__dict__[self.name] = _Listener(self.fn, obj)
         return obj.__dict__[self.name]
 def listens(*a, **k): return lambda fn: _ListenDescriptor(fn)
 listens_group = listens
@@ -34,3 +42,7 @@ def liveobj_valid(obj): return obj is not None
 def old_hasattr(obj, name): return hasattr(obj, name)
 def _notify_any(self, *a, **k): pass
 EventObject.__getattr__ = lambda self, name: (lambda *a, **k: None) if name.startswith('notify_') else (_ for _ in ()).throw(AttributeError(name))
+
+def depends(**dependencies):
+    # Live injects these; the stub just keeps the defaults so tests pass them explicitly.
+    return lambda fn: fn

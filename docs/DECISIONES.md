@@ -16,6 +16,7 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 | 005 | Bancos de parámetros para plugins de terceros | Aceptada | 2026-10-24 | T-03 |
 | 006 | Pantalla limitada a texto Mackie Control de 4×28 | Aceptada | 2026-10-24 | — |
 | 007 | Pruebas manuales mínimas y agrupadas | Aceptada | 2026-10-24 | T-11 |
+| 008 | Control de escenas para el directo | Aceptada | 2026-10-24 | T-04 |
 
 ---
 
@@ -80,6 +81,26 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
   - `docs/FUNCIONES.md` es inventario de referencia, no checklist.
 - **Alternativas descartadas:** checklist completa por PR (horas por versión); proyecto de Live de pruebas versionado (mantenimiento y tiempo de montaje).
 - **Consecuencias:** una regresión en una función no cubierta por la prueba mínima puede llegar al ensayo; por eso `live-stable` solo avanza tras un ensayo, y la versión anterior se recupera copiando su carpeta.
+
+## ADR-008 — Control de escenas para el directo
+
+- **Estado:** Aceptada · **Fecha:** 2026-10-24 · **Issue:** T-04
+- **Contexto:** la banda toca en Session View con escenas que llevan click y fondos. El original solo lanza las 4 escenas visibles (SCENE + pad 4, 8, 12, 16), lo que obliga a mover el recuadro durante la canción. En Live, las Follow Actions de escena no mueven la escena seleccionada, de modo que un «lanzar la seleccionada y avanzar» manual se desincroniza tras una Follow Action; para resolverlo se venden dispositivos de Max for Live específicos ([guía de Ableton Drummer](https://blog.abletondrummer.com/how-to-play-next-scene-automatically/)).
+- **Criterios:**
+  1. Una sola acción por cambio de parte, sin mirar la pantalla y sin cambiar de modo.
+  2. Correcto aunque la escena se haya lanzado con el ratón o con Follow Actions.
+  3. No quitar ninguna función existente.
+  4. Sin conocer la estructura de cada canción: válido tanto para una escena por canción como para varias.
+  5. Fallo seguro (ADR-007).
+- **Decisión:**
+  - SCENE + ▶ / ◀: lanzar la escena siguiente / anterior a la última que se lanzó por cualquier vía (se sigue `is_triggered` de todas las escenas); antes del primer lanzamiento, relativo a la escena seleccionada. Selecciona la escena, mueve el recuadro lo mínimo y muestra su nombre.
+  - Pedal: ajuste opcional «Pedal Function» = «Next Scene» (por defecto «Sustain», como el original). Con él, cada pisada equivale a SCENE + ▶, con 0,3 s de antirrebote.
+  - SCENE + ◀ / ▶ estaban libres: SCENE solo se usaba con los pads 4, 8, 12 y 16.
+- **Alternativas descartadas:**
+  - SCENE + pads 1–16 para 16 escenas: sigue dependiendo de la posición del recuadro y exige mirar los pads.
+  - Modo directo dedicado con canciones en los grupos A–H: requiere una convención de nombres de escena por canción y sustituye la vista de sesión de los grupos.
+  - Activar `link_session_ring_to_scene_selection` del framework: cambia el comportamiento del original en todos los modos.
+- **Consecuencias:** saltar a otra canción sigue haciéndose con el ratón o con el encoder y los pads. Si la banda lo necesita, se añade como opción nueva.
 
 ---
 
