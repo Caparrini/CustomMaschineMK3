@@ -7,7 +7,7 @@ Actualizar en el mismo commit que cambie el estado en el archivo del issue.
 | [T-01](issues/T-01-linea-base.md) | [F0] Línea base: inventario de funciones y checklist de regresión | 0 | 1 | Hecho | `docs/T-01-linea-base` |
 | [T-02](issues/T-02-proyecto-pruebas.md) | [F0] Proyecto de Live de pruebas reproducible | 0 | 1 | Descartado | — |
 | [T-03](issues/T-03-bancos-vst.md) | [F1] Bancos de parámetros para los VST del directo | 1 | 1 | En pruebas | `feat/T-03-bancos-vst` |
-| [T-04](issues/T-04-mapeo-directo.md) | [F1] Mapeo de botones para el directo | 1 | 1 | Backlog | — |
+| [T-04](issues/T-04-mapeo-directo.md) | [F1] Mapeo de botones para el directo | 1 | 1 | En pruebas | `feat/T-04-escenas-directo` |
 | [T-05](issues/T-05-texto-pantalla.md) | [F2] Texto en pantalla: dispositivo, página y parámetros | 2 | 2 | Descartado | — |
 | [T-06](issues/T-06-modo-sampler.md) | [F2] Modo sampler ampliado sobre Simpler | 2 | 2 | Descartado | — |
 | [T-07](issues/T-07-curva-velocidad.md) | [F3] Curva de velocidad configurable de los pads | 3 | 2 | Descartado | — |

@@ -43,6 +43,7 @@ Mientras los issues no estén activos en el fork, los issues son los archivos de
 - **Pantalla:** texto por sysex con cabecera de protocolo Mackie Control, **4 líneas de 28 caracteres** (`DisplayDefinitions.py`: `LCD_LINES`, `LCD_LINE_LENGTH`). Sin gráficos.
 - **Bancos de parámetros:** `CUSTOM_BANK_DEFINITIONS` en `CustomDeviceComponent.py`, indexado por `class_name` del dispositivo de Live (`OriginalSimpler`, `InstrumentVector`, `Eq8`, `Hybrid`...). Los decoradores (`*DeviceDecorator`) exponen parámetros especiales como parámetros normales.
 - **Bancos de plug-ins:** `PluginBanks.py` (ADR-005); datos de la banda en `CustomMaschineMK3/plugin_banks.json` (ADR-004), ejemplo en `plugin_banks.example.json`; guía en `docs/BANCOS_DE_PLUGINS.md`.
+- **Escenas para el directo:** `SceneLaunchComponent.py` (componente) y `SceneLaunchLogic.py` (lógica sin framework, probada en `tests/`); ADR-008; guía en `docs/DIRECTO.md`.
 - **Shift:** se recibe por sysex (`SysexShiftButton.py`).
 - **Ajustes de usuario:** `settings.json` en la carpeta del script (`SettingsComponent.py`), no versionado.
 - **Notificaciones:** mensajes temporales de 1,5 s en pantalla (`DisplayDefinitions.py`, `Notifications`); el cambio de dispositivo y de banco ya se notifica.

@@ -198,6 +198,12 @@ class Notifications(DefaultNotifications):
         select = lambda note: f"Note {pitch_index_to_string(note, PITCH_NAMES)}\nselected"
         select: "Notification[Fn[int]]"
 
+    class SceneLaunch:
+        launch = lambda number, name: f"Scene {number}\n{name[:LCD_LINE_LENGTH]}"
+        launch: "Notification[Fn[int, str]]"
+        no_scene = "No {} scene".format
+        no_scene: "Notification[Fn[str]]"
+
     class StepSequence:
         grid_resolution = "Step sequence grid\n{}".format
         grid_resolution: "Notification[Fn[str]]"

@@ -29,6 +29,7 @@ def create_mappings(surface):
     # Load settings
     sequencer_style = surface._settings.get_value("sequencer_style")
     mixer_mode = surface._settings.get_value("mixer_mode")
+    pedal_function = surface._settings.get_value("pedal_function")
 
     mappings = {}
     mappings["Transport"] = dict(
@@ -462,9 +463,20 @@ def create_mappings(surface):
         notes_button = "notes"
     )
 
-    mappings["Maschine_Playable"] = dict(
-        pedal_tip_encoder = "pedaltip",
-        pedal_ring_encoder = "pedalring",
+    mappings["Scene_Launch"] = dict(
+        next_scene_button = "right_with_scene",
+        prev_scene_button = "left_with_scene",
     )
+
+    if pedal_function == "Next Scene":
+        mappings["Scene_Launch"]["pedal_input"] = "pedaltip"
+        mappings["Maschine_Playable"] = dict(
+            pedal_ring_encoder = "pedalring",
+        )
+    else:
+        mappings["Maschine_Playable"] = dict(
+            pedal_tip_encoder = "pedaltip",
+            pedal_ring_encoder = "pedalring",
+        )
 
     return mappings

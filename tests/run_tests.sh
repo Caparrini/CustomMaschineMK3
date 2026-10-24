@@ -17,9 +17,11 @@ cp "$REF/ableton/v3/control_surface/banking_util.py" "$HARNESS/ableton/v3/contro
 # Decompiler artifacts: x[1[:None]] -> x[1:], x[None[:n]] -> x[:n], f)(a, ...) -> f)(*a, ...)
 sed -i -E 's/\[([A-Za-z0-9_]+)\[:None\]\]/[\1:]/g; s/\[None\[:([^]]+)\]\]/[:\1]/g; s/__init__\)\(a, /__init__)(*a, /g' \
     "$HARNESS"/ableton/v2/control_surface/*.py "$HARNESS"/ableton/v3/control_surface/banking_util.py
-cp "$REPO/CustomMaschineMK3/PluginBanks.py" "$REPO/CustomMaschineMK3/Config.py" "$REPO/CustomMaschineMK3/Logger.py" "$HARNESS/CustomMaschineMK3/"
+for module in PluginBanks Config Logger SceneLaunchLogic SceneLaunchComponent; do
+    cp "$REPO/CustomMaschineMK3/$module.py" "$HARNESS/CustomMaschineMK3/"
+done
 touch "$HARNESS/CustomMaschineMK3/__init__.py"
 
 cd "$REPO"
 python3 -m py_compile CustomMaschineMK3/*.py
-HARNESS="$HARNESS" python3 -m unittest -v tests/test_plugin_banks.py
+HARNESS="$HARNESS" python3 -m unittest -v tests/test_plugin_banks.py tests/test_scene_launch.py tests/test_mappings.py

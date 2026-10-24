@@ -158,6 +158,13 @@ SETTINGS = [
         "enum": ["Maschine", "Push"]
     },
     {
+        "key": "pedal_function",
+        "description": "Pedal Function (Reload required)",
+        "type": "enum",
+        "default_value": "Sustain",
+        "enum": ["Sustain", "Next Scene"]
+    },
+    {
         "key": "mixer_mode",
         "description": "Mixer Mode (Reload required)",
         "type": "enum",
