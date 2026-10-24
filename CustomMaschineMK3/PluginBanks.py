@@ -99,7 +99,8 @@ def load_plugin_banks(file_path = None):
     if not file_path.exists():
         return []
     try:
-        data = json.loads(file_path.read_text(encoding = "utf-8"))
+        # utf-8-sig also accepts files saved with a BOM (e.g. by Windows Notepad)
+        data = json.loads(file_path.read_text(encoding = "utf-8-sig"))
     except Exception as error:
         logger.warning(f"{PLUGIN_BANKS_FILE_NAME} could not be read, plug-in banks disabled: {error}")
         return []

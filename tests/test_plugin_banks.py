@@ -89,6 +89,8 @@ class ParseTests(unittest.TestCase):
             self.assertEqual(pb.load_plugin_banks(path), [])
             path.write_text(json.dumps(BANKS_JSON), encoding = "utf-8")
             self.assertEqual(len(pb.load_plugin_banks(path)), 3)
+            path.write_text(json.dumps(BANKS_JSON), encoding = "utf-8-sig")
+            self.assertEqual(len(pb.load_plugin_banks(path)), 3)
 
 
 class MatchingTests(unittest.TestCase):
