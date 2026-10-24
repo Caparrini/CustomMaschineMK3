@@ -17,6 +17,7 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 | 006 | Pantalla limitada a texto Mackie Control de 4×28 | Aceptada | 2026-10-24 | — |
 | 007 | Pruebas manuales mínimas y agrupadas | Aceptada | 2026-10-24 | T-11 |
 | 008 | Control de escenas para el directo | Aceptada | 2026-10-24 | T-04 |
+| 009 | Objetivo: flujo de trabajo y creatividad, además del directo | Aceptada | 2026-10-24 | T-12 |
 
 ---
 
@@ -101,6 +102,18 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
   - Modo directo dedicado con canciones en los grupos A–H: requiere una convención de nombres de escena por canción y sustituye la vista de sesión de los grupos.
   - Activar `link_session_ring_to_scene_selection` del framework: cambia el comportamiento del original en todos los modos.
 - **Consecuencias:** saltar a otra canción sigue haciéndose con el ratón o con el encoder y los pads. Si la banda lo necesita, se añade como opción nueva.
+
+## ADR-009 — Objetivo: flujo de trabajo y creatividad, además del directo
+
+- **Estado:** Aceptada · **Fecha:** 2026-10-24 · **Issue:** T-12
+- **Contexto:** el proyecto se planteó para el directo de la banda, pero su objetivo principal es mejorar el flujo de trabajo y la creatividad con la MK3 en Live, más cerca del uso nativo de Maschine.
+- **Decisión:**
+  - Las mejoras se priorizan por cuánto evitan el ratón y la pantalla del ordenador mientras se produce, y por su riesgo para la respuesta del controlador.
+  - `live-stable` (ADR-002) es la versión estable de uso diario, no solo de concierto. Pasa a ella tras la prueba mínima y una sesión de uso real.
+  - Criterios para incorporar una función: (1) evita una acción con ratón frecuente al producir; (2) no quita funciones del original; (3) no añade tráfico MIDI continuo (el original espera 0,5 ms tras cada mensaje a la MK3, `_do_send_midi`); (4) cabe en la pantalla de 4×28.
+- **Aplicación (T-12):**
+  - Incorporadas: abrir y cerrar la ventana del plug-in (SHIFT + PLUG-IN), duplicar escena (DUPLICATE + SCENE + pad), tempo en el navegador (encoders 2 y 3).
+  - Descartadas: medidores en los pads (criterio 3: mensajes continuos a los pads); color de pads de Drum Rack por nombre (el original ya muestra el color de cada cadena, que se elige en Live); navegador integrado con la vista del navegador de Live (el autor del original lo deja como limitación y no se conoce soporte en la API de scripts); más controles mapeables (el modo CHANNEL ya ofrece 16).
 
 ---
 

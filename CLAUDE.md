@@ -1,7 +1,7 @@
 # CLAUDE.md — Instrucciones para Claude en este repositorio
 
 Fork de [chiakibeats/CustomMaschineMK3](https://github.com/chiakibeats/CustomMaschineMK3) mantenido en `Caparrini/CustomMaschineMK3`.
-Objetivo: adaptar el remote script de Ableton Live para la Maschine MK3 al directo de la banda y devolver al proyecto original, mediante pull requests, las mejoras de interés general.
+Objetivo: mejorar el flujo de trabajo y la creatividad con la Maschine MK3 en Ableton Live, en producción y en el directo de la banda (ADR-009), y devolver al proyecto original, mediante pull requests, las mejoras de interés general.
 
 Idioma de trabajo: castellano (España) en issues, commits, documentación y comentarios nuevos. Los PR al repositorio original se redactan en inglés.
 
@@ -14,6 +14,7 @@ Idioma de trabajo: castellano (España) en issues, commits, documentación y com
 | `CHANGELOG.md` | Cambios por versión |
 | `docs/FUNCIONES.md` | Qué hace cada control, con IDs `R-xxx` para citar funciones |
 | `docs/pruebas/PRUEBA_MINIMA.md` | Única prueba manual, por versión candidata |
+| `docs/pruebas/VERSION_CANDIDATA.md` | Pasos manuales específicos acumulados para la próxima prueba |
 
 ## Provisional: seguimiento sin GitHub Issues
 
@@ -43,7 +44,8 @@ Mientras los issues no estén activos en el fork, los issues son los archivos de
 - **Pantalla:** texto por sysex con cabecera de protocolo Mackie Control, **4 líneas de 28 caracteres** (`DisplayDefinitions.py`: `LCD_LINES`, `LCD_LINE_LENGTH`). Sin gráficos.
 - **Bancos de parámetros:** `CUSTOM_BANK_DEFINITIONS` en `CustomDeviceComponent.py`, indexado por `class_name` del dispositivo de Live (`OriginalSimpler`, `InstrumentVector`, `Eq8`, `Hybrid`...). Los decoradores (`*DeviceDecorator`) exponen parámetros especiales como parámetros normales.
 - **Bancos de plug-ins:** `PluginBanks.py` (ADR-005); datos de la banda en `CustomMaschineMK3/plugin_banks.json` (ADR-004), ejemplo en `plugin_banks.example.json`; guía en `docs/BANCOS_DE_PLUGINS.md`.
-- **Escenas para el directo:** `SceneLaunchComponent.py` (componente) y `SceneLaunchLogic.py` (lógica sin framework, probada en `tests/`); ADR-008; guía en `docs/DIRECTO.md`.
+- **Escenas:** `SceneLaunchComponent.py` (componente) y `SceneLaunchLogic.py` (lógica sin framework, probada en `tests/`); ADR-008; guía en `docs/DIRECTO.md`.
+- **Ventana de dispositivo:** `DeviceWindowComponent.py` (SHIFT + PLUG-IN). **Duplicar escena:** `CustomSessionComponent.py`.
 - **Shift:** se recibe por sysex (`SysexShiftButton.py`).
 - **Ajustes de usuario:** `settings.json` en la carpeta del script (`SettingsComponent.py`), no versionado.
 - **Notificaciones:** mensajes temporales de 1,5 s en pantalla (`DisplayDefinitions.py`, `Notifications`); el cambio de dispositivo y de banco ya se notifica.
