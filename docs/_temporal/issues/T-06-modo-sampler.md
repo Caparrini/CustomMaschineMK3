@@ -1,10 +1,18 @@
 # T-06 · [F2] Modo sampler ampliado sobre Simpler
 
-- **Estado:** Backlog
+- **Estado:** Descartado
 - **Fase:** 2 · **Prioridad:** 2
 - **Etiquetas:** tipo: mejora, upstream: candidata
 - **Rama:** —
 - **Issue de GitHub:** pendiente de migrar
+
+## Resolución
+Cubierto por el original, sin cambios de código. El banco de Simpler de `CustomDeviceComponent.py` ya incluye:
+- «Main»: modo, inicio, fin y parámetros según el modo (Classic, One-Shot, Slicing).
+- «Amplitude», «Filter Envelope», «Pitch Modifiers»: envolventes.
+- «Sample & Warp»: ganancia, inicio, fin, warp, modo de warp y sus parámetros.
+- Slices: modo Simpler en Slicing desde KEYBOARD (R-531 a R-534 en `docs/FUNCIONES.md`).
+Si en el uso real falta algo concreto, se reabre con ese parámetro.
 
 ## Contexto
 Objetivo: un flujo de sampler parecido al de Maschine sobre Simpler.

@@ -1,0 +1,29 @@
+# Prueba mínima
+
+Única prueba manual obligatoria antes de llevar una versión al directo. Objetivo: menos de 5 minutos. Se hace una vez por versión candidata, no por cada cambio: una sesión valida todos los PR acumulados.
+
+Solo hay que anotar lo que falle. Si todo va bien, basta con escribir «Prueba mínima correcta» y el commit en el issue o PR.
+
+## Preparación (una vez por versión)
+
+1. Cerrar Live.
+2. Copiar la carpeta `CustomMaschineMK3` del repositorio encima de la instalada en `User Library/Remote Scripts/`, fusionando. Si se sustituye la carpeta entera, se pierden los ajustes del modo SETTINGS (`settings.json`).
+3. MK3 en modo MIDI (SHIFT + botón MASCHINE).
+4. Abrir Live con un proyecto real de la banda que tenga al menos un Simpler o un instrumento y un plug-in.
+
+## Pasos
+
+| Paso | Acción | Resultado esperado |
+| --- | --- | --- |
+| P1 | Preferencias → Link, Tempo & MIDI: superficie de control `CustomMaschineMK3`, entrada y salida de la MK3 | Los LED de la MK3 se encienden y la pantalla muestra el mezclador |
+| P2 | PAD MODE y pulsar un pad con clip | El clip se lanza |
+| P3 | Seleccionar una pista con instrumento, KEYBOARD y tocar pads | Suena el instrumento |
+| P4 | PLUG-IN y girar un encoder | El parámetro cambia en Live y en la pantalla |
+| P5 | ▶ en modo PLUG-IN | Cambia el banco y la pantalla muestra su nombre 1,5 s |
+| P6 | Pasos específicos que indique el PR o la versión | Los que indique |
+
+## Si algo falla
+
+- Anotar el paso (`P4 fallo: …`) en el issue o PR.
+- Adjuntar `Log.txt` de Live (Windows: `%AppData%\Ableton\Live <versión>\Preferences\`; macOS: `~/Library/Preferences/Ableton/Live <versión>/`). No hace falta buscar el error dentro.
+- Para volver a la versión anterior: copiar la carpeta de la etiqueta `live-…` anterior y reiniciar Live.

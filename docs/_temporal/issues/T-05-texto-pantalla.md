@@ -1,10 +1,16 @@
 # T-05 · [F2] Texto en pantalla: dispositivo, página y parámetros
 
-- **Estado:** Backlog
+- **Estado:** Descartado
 - **Fase:** 2 · **Prioridad:** 2
 - **Etiquetas:** tipo: mejora, upstream: candidata
 - **Rama:** —
 - **Issue de GitHub:** pendiente de migrar
+
+## Resolución
+Cubierto por el original, sin cambios de código:
+- Al cambiar de dispositivo y de banco, la pantalla muestra su nombre durante 1,5 s (`CustomDeviceNavigationComponent` notifica `Device.select`; `DeviceBankNavigationComponent` de Live notifica `Device.bank`).
+- En modo dispositivo se ven nombres abreviados y valores de los 8 parámetros; al tocar un encoder, nombre completo y valor.
+Mostrar el dispositivo de forma permanente exigiría quitar una línea de parámetros (ADR-006). Si la banda lo pide tras usarlo, se reabre con ese alcance.
 
 ## Contexto
 La pantalla admite 4 líneas de 28 caracteres (ADR-006). Hay que aprovecharla para no mirar el ordenador.

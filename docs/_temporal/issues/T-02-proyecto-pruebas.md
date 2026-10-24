@@ -1,10 +1,13 @@
 # T-02 · [F0] Proyecto de Live de pruebas reproducible
 
-- **Estado:** Backlog
+- **Estado:** Descartado
 - **Fase:** 0 · **Prioridad:** 1
 - **Etiquetas:** tipo: prueba
 - **Rama:** —
 - **Issue de GitHub:** pendiente de migrar
+
+## Resolución
+Descartado por ADR-007: la prueba mínima usa un proyecto real de la banda. Montar y mantener un proyecto de pruebas cuesta más tiempo de prueba del que ahorra.
 
 ## Contexto
 Para que las pruebas sean reproducibles todas deben hacerse sobre el mismo proyecto de Live.

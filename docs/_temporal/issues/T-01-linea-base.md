@@ -1,10 +1,13 @@
 # T-01 · [F0] Línea base: inventario de funciones y checklist de regresión
 
-- **Estado:** En pruebas
+- **Estado:** Hecho
 - **Fase:** 0 · **Prioridad:** 1
 - **Etiquetas:** tipo: prueba
 - **Rama:** `docs/T-01-linea-base`
 - **Issue de GitHub:** pendiente de migrar
+
+## Resolución
+Inventario entregado en `docs/FUNCIONES.md`. Por ADR-007 ya no se ejecuta como checklist completa: el criterio «checklist ejecutada completa» queda sustituido por la prueba mínima de cada versión.
 
 ## Contexto
 Antes de modificar nada hace falta saber qué hace hoy el script y poder detectar regresiones.
@@ -13,12 +16,12 @@ Antes de modificar nada hace falta saber qué hace hoy el script y poder detecta
 Inventario de todas las funciones del script (a partir de la [documentación del original](https://chiakibeats.github.io/CustomMaschineDocs/docs/all-operations) y del código) convertido en checklist ejecutable a mano.
 
 ## Criterios de aceptación
-- [x] `docs/pruebas/regresion.md` con una línea por función: modo, control, acción, resultado esperado
+- [x] `docs/FUNCIONES.md` (antes `docs/pruebas/regresion.md`) con una línea por función: modo, control, acción, resultado esperado
 - [ ] Checklist ejecutada completa sobre `main` sin modificar, resultado registrado en este issue
 - [x] Anotado qué hace hoy el script con: bancos de plugins de terceros, texto en pantalla por modo, velocidad de pads
 
 ## Archivos previsiblemente afectados
-`docs/pruebas/regresion.md`
+`docs/FUNCIONES.md`
 
 ## Candidata a contribución al original
 No
@@ -39,3 +42,9 @@ No
   - **Pantalla:** se activa con `Config.LCD_ENABLED`; con ella desactivada los encoders usan otros CC (70–77 en lugar de 16–23).
   - **Ajustes:** se guardan en `settings.json` dentro de la carpeta del script; `sequencer_style` y `mixer_mode` requieren recargar.
 - **Decisiones tomadas:** ninguna
+
+### Registro 2026-10-24 (2)
+- **Hecho:** checklist convertida en inventario de referencia `docs/FUNCIONES.md` (T-11, ADR-007). Corregidos R-909 y R-1015 (doble toque, verificado en el código) y añadido R-1016 (notificación de dispositivo y banco).
+- **Pruebas automáticas:** no aplica (documentación).
+- **Prueba manual:** no aplica.
+- **Decisiones tomadas:** ADR-007

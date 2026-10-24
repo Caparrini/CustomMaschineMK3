@@ -15,6 +15,7 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 | 004 | Configuración específica de la banda separada del código general | Propuesta | 2026-10-24 | ver issue de configuración |
 | 005 | Bancos de parámetros para plugins de terceros | Propuesta | 2026-10-24 | ver issue de bancos VST |
 | 006 | Pantalla limitada a texto Mackie Control de 4×28 | Aceptada | 2026-10-24 | — |
+| 007 | Pruebas manuales mínimas y agrupadas | Aceptada | 2026-10-24 | T-11 |
 
 ---
 
@@ -59,6 +60,20 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 - **Estado:** Aceptada · **Fecha:** 2026-10-24
 - **Contexto:** `DisplayDefinitions.py` envía texto por sysex con cabecera Mackie Control: 4 líneas de 28 caracteres.
 - **Decisión:** todo diseño de pantalla se ajusta a 4×28. Cualquier propuesta que lo supere requiere un ADR nuevo.
+
+## ADR-007 — Pruebas manuales mínimas y agrupadas
+
+- **Estado:** Aceptada · **Fecha:** 2026-10-24 · **Issue:** T-11
+- **Contexto:** la única forma de comprobar el script en Live es con la MK3 conectada, y el tiempo de quien prueba es el recurso más caro del proyecto. Una checklist de regresión de 162 casos o un proyecto de pruebas dedicado no son asumibles.
+- **Decisión:**
+  - Todo lo verificable sin Live se verifica con pruebas automáticas (`tests/`) contra el código de bancos de Live 12.
+  - Todo código nuevo que toque el framework falla de forma segura: registra el error y conserva el comportamiento original.
+  - La prueba manual es una sola: `docs/pruebas/PRUEBA_MINIMA.md`, menos de 5 minutos, una vez por versión candidata, con como mucho 3 pasos específicos por PR acumulado. Solo se anotan los fallos.
+  - Se usa un proyecto real de la banda; no hay proyecto de pruebas.
+  - Los cambios solo de documentación no requieren prueba manual.
+  - `docs/FUNCIONES.md` es inventario de referencia, no checklist.
+- **Alternativas descartadas:** checklist completa por PR (horas por versión); proyecto de Live de pruebas versionado (mantenimiento y tiempo de montaje).
+- **Consecuencias:** una regresión en una función no cubierta por la prueba mínima puede llegar al ensayo; por eso `live-stable` solo avanza tras un ensayo, y la versión anterior se recupera copiando su carpeta.
 
 ---
 

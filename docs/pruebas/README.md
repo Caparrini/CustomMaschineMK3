@@ -1,6 +1,11 @@
 # Pruebas
 
-- `regresion.md`: checklist de funciones existentes. Se crea en el issue de línea base y se amplía con cada mejora fusionada.
-- `proyecto-pruebas/`: proyecto de Live usado en todas las pruebas, para que los resultados sean reproducibles.
+| Qué | Dónde | Quién | Cuándo |
+| --- | --- | --- | --- |
+| Pruebas automáticas sin Live | `tests/` (`tests/run_tests.sh`) | Claude | En cada PR |
+| Prueba mínima con Live y la MK3 | `PRUEBA_MINIMA.md` | Persona con el hardware | Una vez por versión candidata, menos de 5 minutos |
+| Inventario de funciones | `docs/FUNCIONES.md` | Consulta | No se ejecuta completo |
 
-Los resultados de cada ejecución no se guardan aquí: se registran como comentario en el issue correspondiente (formato en `docs/FLUJO_DE_TRABAJO.md`).
+No hay proyecto de Live de pruebas: la prueba mínima usa un proyecto real de la banda (ADR-007).
+
+Los resultados no se guardan aquí: se registran en el issue o PR correspondiente (formato en `docs/FLUJO_DE_TRABAJO.md`, apartado 3).

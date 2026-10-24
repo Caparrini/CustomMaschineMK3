@@ -1,20 +1,23 @@
 Closes #
+<!-- Mientras los issues de GitHub no estén activos: «Issue: T-NN» -->
 
 ## Resumen del cambio
 
 ## Archivos modificados
 
-## Pruebas ejecutadas
-- Commit probado:
-- Entorno (SO, versión de Live):
-- [ ] Carga sin errores en `Log.txt`
-- [ ] Criterios de aceptación del issue
-- [ ] Checklist de regresión (`docs/pruebas/regresion.md`)
-- [ ] `python3 -m py_compile CustomMaschineMK3/*.py`
+## Pruebas automáticas
+- [ ] `tests/run_tests.sh` correcto (incluye `py_compile`)
+- [ ] Relectura completa del diff, separada de la escritura
+- [ ] Cada llamada nueva al framework contrastada con los scripts de Live 12 y con fallo seguro
+
+## Pasos manuales para la próxima prueba mínima
+<!-- Como mucho 3, cada uno con acción y resultado esperado. «Ninguno» si el cambio no los necesita. -->
+1. 
 
 ## Riesgo de regresión
-<!-- Modos o funciones que podrían verse afectados -->
+<!-- Modos o funciones (IDs R-xxx de docs/FUNCIONES.md) que podrían verse afectados -->
 
 ## Documentación
-- [ ] `CHANGELOG.md` actualizado
-- [ ] `docs/DECISIONES.md` actualizado (si aplica)
+- [ ] `CHANGELOG.md`
+- [ ] `docs/DECISIONES.md` (si aplica)
+- [ ] `docs/FUNCIONES.md` (si cambia o se añade una función)

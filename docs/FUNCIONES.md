@@ -1,13 +1,14 @@
-# Checklist de regresión
+# Funciones del script
 
-Inventario de las funciones de CustomMaschineMK3 versión 1.4 (commit `6b8cdb5` del original), elaborado a partir de `Mappings.py`, `ControlElements.py`, `DisplayDefinitions.py`, `SettingsComponent.py` y la [documentación de operaciones del original](https://chiakibeats.github.io/CustomMaschineDocs/docs/all-operations).
+Inventario de las funciones de CustomMaschineMK3 versión 1.4 (commit `6b8cdb5` del original), elaborado a partir de `Mappings.py`, `ControlElements.py`, `DisplayDefinitions.py` y `SettingsComponent.py`, contrastado con la [documentación de operaciones del original](https://chiakibeats.github.io/CustomMaschineDocs/docs/all-operations).
 
-## Cómo usarla
+Es documentación de referencia, no una lista de pruebas: no se ejecuta completa (ADR-007). Sirve para:
 
-- Ejecutarla completa sobre el proyecto de pruebas (T-02) antes de fusionar cualquier cambio en `develop`.
-- Registrar el resultado en el issue por ID: `R-xxx correcto` o `R-xxx fallo: <descripción>`. Solo hace falta listar los fallos y los casos no ejecutados.
-- Ajustes por defecto salvo que el caso diga otra cosa (sección 15).
-- Columna **Fuente**: `M` = verificado en el código (`Mappings.py`); `D` = solo en la documentación del original, sin confirmar en el código.
+- Saber qué control hace qué sin abrir el código.
+- Citar una función por su ID (`R-xxx`) en issues, PR y fallos.
+- Elegir, en cada PR, los pocos casos afectados por el cambio que hay que probar a mano.
+
+Columna **Fuente**: `M` = verificado en el código (`Mappings.py` y componentes); `D` = solo en la documentación del original.
 
 ## Convenciones
 
@@ -17,13 +18,13 @@ Inventario de las funciones de CustomMaschineMK3 versión 1.4 (commit `6b8cdb5` 
 - **Encoder**: el encoder principal 4D. «Inclinar» = empujarlo arriba, abajo, izquierda o derecha.
 - **Grupos A–H**: los 8 botones de grupo.
 
-## Requisitos previos
+## Instalación
 
 | ID | Comprobación | Resultado esperado |
 | --- | --- | --- |
 | R-000 | MK3 en modo MIDI (SHIFT + botón MASCHINE) con la plantilla `Template/CustomMaschineMK3.ncm3` cargada | La pantalla deja de mostrar el software Maschine |
 | R-001 | Seleccionar `CustomMaschineMK3` como superficie de control en Live | Sin errores en `Log.txt` de Live; los LED de la MK3 se encienden |
-| R-002 | Abrir el proyecto de pruebas | La pantalla muestra el modo mezclador (sección 9) |
+| R-002 | Abrir un proyecto de Live | La pantalla muestra el modo mezclador (sección 9) |
 
 ## 1. Transporte
 
@@ -192,7 +193,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-906 | Botones 1–8 | Seleccionan pista | M |
 | R-907 | SELECT + botón | Arma / desarma pista | M |
 | R-908 | MUTE + botón / SOLO + botón | Mute / solo de pista | M |
-| R-909 | ERASE + encoder 1–8 (dos veces, según la documentación) | Restablece el valor por defecto | D |
+| R-909 | ERASE + doble toque en encoder 1–8 | Restablece el valor por defecto | M |
 | R-910 | PERFORM + grupos A–H | Cambia la asignación del crossfader | M |
 | R-911 | Ajuste `mixer_mode` en «4Track» | Mezclador de 4 pistas: encoders 1–4 pan/envío, 5–8 volumen, botones 1–4 armado, 5–8 selección, PERFORM + A–D crossfader | M |
 
@@ -213,8 +214,9 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1011 | PLUG-IN + LOCK | Bloquea el dispositivo objetivo | M |
 | R-1012 | VARIATION / DUPLICATE + VARIATION | Alterna ranura A/B / copia parámetros a la otra ranura | M |
 | R-1013 | Bancos propios en Simpler, Wavetable, EQ Eight, Hybrid Reverb, Meld | Bancos personalizados del script en lugar de los de Live | M |
-| R-1014 | Dispositivo VST | Parámetros en el orden que expone Live, sin bancos propios | M |
-| R-1015 | ERASE + encoder 1–8 (dos veces, según la documentación) | Restablece el parámetro a su valor por defecto | D |
+| R-1014 | Plug-in VST/AU | Parámetros en el orden que expone Live, en bancos de 8 | M |
+| R-1015 | ERASE + doble toque en encoder 1–8 | Restablece el parámetro a su valor por defecto (solo continuos) | M |
+| R-1016 | Cambiar de dispositivo o de banco | Notificación de 1,5 s con el nombre del dispositivo o del banco | M |
 
 ## 11. Tira táctil
 
@@ -262,7 +264,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1402 | MACRO | Modo aprendizaje para encoders | M |
 | R-1403 | Encoders 1–8 y botones 1–8 | Controlan lo mapeado con MIDI Map de Live | M |
 | R-1404 | ◀ / ▶ | Página anterior / siguiente | M |
-| R-1405 | Volver al modo teclado tras usar este modo | Sin LED residuales en notas C-2 a G-2 (fallo conocido del original, ver T-08) | M |
+| R-1405 | Volver al modo teclado tras usar este modo | Sin LED residuales en notas C-2 a G-2 (fallo conocido del original, T-08) | M |
 
 ## 15. Ajustes (SETTINGS)
 
