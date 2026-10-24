@@ -58,6 +58,7 @@ from ableton.v2.control_surface import (
 
 from .KnobTouchStateMixin import KnobTouchStateMixin
 from .Logger import logger
+from .PluginBanks import PluginAwareBankingInfo, load_plugin_banks, dump_plugin_parameters
 
 class FloatParameter(WrappingParameter):
     def __init__(
@@ -515,7 +516,8 @@ class CustomDeviceComponent(DeviceComponent):
     erase_button = ButtonControl(color = None)
     compare_ab_button = ButtonControl(color = "DefaultButton.Off", on_color = "DefaultButton.On")
     copy_to_other_button = ButtonControl(color = None)
-    
+    _plugin_banking_checked = False
+
     def __init__(self, name = "Device", *a, **k):
         if self.application.get_major_version() >= 12:
             self._add_live_12_device_definitions()
@@ -693,7 +695,30 @@ class CustomDeviceComponent(DeviceComponent):
                 if liveobj_valid(parameter) and not parameter.is_quantized:
                     parameter.value = parameter.default_value
 
+    def _setup_bank(self, device, *a, **k):
+        # DeviceComponent creates its BankingInfo inside __init__, before this subclass can
+        # pass one in. The first bank is set up after that, so the plug-in aware version is
+        # installed here, once, before any bank exists. plugin_banks.json is read only then:
+        # changes to it need the control surface to be reloaded.
+        # Any failure keeps Live's own BankingInfo, so the controller works as before.
+        if not self._plugin_banking_checked:
+            self._plugin_banking_checked = True
+            try:
+                banking_info = PluginAwareBankingInfo(
+                    self._banking_info._bank_definitions,
+                    load_plugin_banks(),
+                    bank_size = self._banking_info.bank_size)
+                navigation = self._bank_navigation_component
+                if not hasattr(navigation, "_banking_info"):
+                    raise AttributeError("bank navigation has no _banking_info")
+                self._banking_info = banking_info
+                navigation._banking_info = banking_info
+            except Exception as error:
+                logger.warning(f"Plug-in banks disabled: {error}")
+        super()._setup_bank(device, *a, **k)
+
     def _on_device_changed(self, device):
+        dump_plugin_parameters(device)
         super()._on_device_changed(device)
         if hasattr(device, "can_compare_ab") and device.can_compare_ab:
             self._can_compare_ab = True

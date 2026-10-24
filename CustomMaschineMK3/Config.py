@@ -11,3 +11,7 @@
 LOGGING = False
 LOG_LEVEL = "INFO"
 LCD_ENABLED = True
+
+# Write the parameters Live exposes for each selected plug-in to "plugin_parameters/<name>.txt"
+# (see PluginBanks.py). Used to build plugin_banks.json.
+PLUGIN_PARAMETER_DUMP = True
