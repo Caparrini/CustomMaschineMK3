@@ -1,10 +1,19 @@
 # T-03 · [F1] Bancos de parámetros para los VST del directo
 
-- **Estado:** Backlog
+- **Estado:** En pruebas
 - **Fase:** 1 · **Prioridad:** 1
 - **Etiquetas:** tipo: mejora, upstream: candidata
-- **Rama:** —
+- **Rama:** `feat/T-03-bancos-vst`
 - **Issue de GitHub:** pendiente de migrar
+
+## Estado de los criterios (2026-10-24)
+- [x] `class_name` verificado en los scripts de Live: `PluginDevice` (VST) y `AuPluginDevice` (AU), registrado en ADR-005. No hace falta comprobarlo en Live.
+- [ ] Banco funcional para los VST del directo: el mecanismo está hecho; faltan los nombres de parámetros (pasos 1–3 de `docs/BANCOS_DE_PLUGINS.md`).
+- [x] Parámetro no expuesto: deja el encoder vacío sin error (cubierto por prueba automática).
+- [x] Documentado cómo exponer parámetros: `docs/BANCOS_DE_PLUGINS.md`.
+
+## Pasos manuales para la próxima prueba mínima
+1. En modo PLUG-IN, seleccionar cada plug-in del directo: aparece `plugin_parameters/<nombre>.txt` en la carpeta del script. Enviar esos archivos.
 
 ## Contexto
 Los bancos personalizados solo existen para dispositivos nativos (Simpler, Wavetable, EQ Eight, Hybrid Reverb, Meld). Para los VST del directo los encoders siguen el orden de parámetros que expone Live, poco útil para tocar.
@@ -30,3 +39,10 @@ Parcial: el mecanismo de bancos por plugin sí; los bancos concretos de la banda
 ## Registro de trabajo
 
 <!-- Una entrada por sesión, formato de docs/FLUJO_DE_TRABAJO.md, apartado 3 -->
+
+### Registro 2026-10-24
+- **Hecho:** `PluginBanks.py` (bancos por nombre de plug-in desde `plugin_banks.json` y volcado de parámetros), enganche en `CustomDeviceComponent._setup_bank` con fallo seguro, `Config.PLUGIN_PARAMETER_DUMP`, ejemplo `plugin_banks.example.json`, guía `docs/BANCOS_DE_PLUGINS.md`, ADR-004 y ADR-005 aceptadas.
+- **Verificación:** cada método sobrescrito o usado (`BankingInfo`, `create_parameter_bank`, `DescribedDeviceParameterBank`, `DeviceComponent._setup_bank`, `DeviceBankNavigationComponent._banking_info`) contrastado con los scripts descompilados de Live 12.0. `class_name` de plug-ins (`PluginDevice`, `AuPluginDevice`) comprobado en `FaderfoxHelper` de Live.
+- **Pruebas automáticas:** `tests/run_tests.sh` correcto, 17 pruebas contra el código de bancos de Live.
+- **Pendiente:** pasos manuales en la próxima prueba mínima; `plugin_banks.json` de la banda cuando se tengan los nombres de parámetros.
+- **Decisiones tomadas:** ADR-004, ADR-005

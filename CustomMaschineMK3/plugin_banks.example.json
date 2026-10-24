@@ -1,0 +1,6 @@
+{
+    "Example Synth": {
+        "Oscillators": ["Osc 1 Level", "Osc 1 Shape", "Osc 2 Level", "Osc 2 Shape", "", "", "", ""],
+        "Filter": ["Cutoff", "Resonance", "Env Amount", "Drive"]
+    }
+}

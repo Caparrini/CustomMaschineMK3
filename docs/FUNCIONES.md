@@ -178,7 +178,7 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-808 | TEMPO + girar / SHIFT + girar | Tempo en pasos de 1,0 / 0,1 | M |
 | R-809 | SHIFT + TEMPO + girar | Cambia el tipo de escala | M |
 | R-810 | SHIFT + TEMPO + pulsar el encoder | Activa / desactiva el modo escala | M |
-| R-811 | SHIFT + TEMPO + inclinar | Cambia nota raíz u opciones de escala (dirección exacta por confirmar) | M |
+| R-811 | SHIFT + TEMPO + inclinar arriba / abajo | Nota raíz un semitono arriba / abajo (izquierda y derecha solo encienden LED) | M |
 | R-812 | Pulsar de nuevo el botón del modo activo | Vuelve al modo de encoder por defecto | M |
 
 ## 9. Mezclador (MIXER), modo de 8 pistas por defecto
@@ -214,9 +214,11 @@ La selección del submodo es automática según el dispositivo de la pista.
 | R-1011 | PLUG-IN + LOCK | Bloquea el dispositivo objetivo | M |
 | R-1012 | VARIATION / DUPLICATE + VARIATION | Alterna ranura A/B / copia parámetros a la otra ranura | M |
 | R-1013 | Bancos propios en Simpler, Wavetable, EQ Eight, Hybrid Reverb, Meld | Bancos personalizados del script en lugar de los de Live | M |
-| R-1014 | Plug-in VST/AU | Parámetros en el orden que expone Live, en bancos de 8 | M |
+| R-1014 | Plug-in VST/AU sin entrada en `plugin_banks.json` | Parámetros en el orden que expone Live, en bancos de 8 | M |
 | R-1015 | ERASE + doble toque en encoder 1–8 | Restablece el parámetro a su valor por defecto (solo continuos) | M |
 | R-1016 | Cambiar de dispositivo o de banco | Notificación de 1,5 s con el nombre del dispositivo o del banco | M |
+| R-1017 | Plug-in VST/AU con entrada en `plugin_banks.json` | Bancos con los nombres y parámetros del archivo; ◀ / ▶ y MACRO + botones los recorren (T-03) | M |
+| R-1018 | Seleccionar un plug-in VST/AU | Se escribe `plugin_parameters/<nombre>.txt` en la carpeta del script con los parámetros que Live expone (T-03) | M |
 
 ## 11. Tira táctil
 

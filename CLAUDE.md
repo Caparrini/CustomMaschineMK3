@@ -38,10 +38,11 @@ Mientras los issues no estén activos en el fork, los issues son los archivos de
 - **Punto de entrada:** `CustomMaschineMK3/__init__.py` (`get_capabilities`, `create_instance`). Identifica MK3 (USB `0x17CC:0x1600`) y Maschine Plus (`0x17CC:0x1820`).
 - **Clase principal:** `CustomMaschineMK3/CustomMaschineMK3.py`.
 - **Elementos de hardware:** `ControlElements.py`. **Asignación de elementos a componentes y modos:** `Mappings.py`.
-- **Configuración:** `Config.py` (`LOGGING`, `LOG_LEVEL`, `LCD_ENABLED`).
+- **Configuración:** `Config.py` (`LOGGING`, `LOG_LEVEL`, `LCD_ENABLED`, `PLUGIN_PARAMETER_DUMP`).
 - **Logs:** con `LOGGING = True`, el script escribe `CustomMaschineMK3.log` en su propia carpeta. Los errores de Python no capturados aparecen en `Log.txt` de Live.
 - **Pantalla:** texto por sysex con cabecera de protocolo Mackie Control, **4 líneas de 28 caracteres** (`DisplayDefinitions.py`: `LCD_LINES`, `LCD_LINE_LENGTH`). Sin gráficos.
 - **Bancos de parámetros:** `CUSTOM_BANK_DEFINITIONS` en `CustomDeviceComponent.py`, indexado por `class_name` del dispositivo de Live (`OriginalSimpler`, `InstrumentVector`, `Eq8`, `Hybrid`...). Los decoradores (`*DeviceDecorator`) exponen parámetros especiales como parámetros normales.
+- **Bancos de plug-ins:** `PluginBanks.py` (ADR-005); datos de la banda en `CustomMaschineMK3/plugin_banks.json` (ADR-004), ejemplo en `plugin_banks.example.json`; guía en `docs/BANCOS_DE_PLUGINS.md`.
 - **Shift:** se recibe por sysex (`SysexShiftButton.py`).
 - **Ajustes de usuario:** `settings.json` en la carpeta del script (`SettingsComponent.py`), no versionado.
 - **Notificaciones:** mensajes temporales de 1,5 s en pantalla (`DisplayDefinitions.py`, `Notifications`); el cambio de dispositivo y de banco ya se notifica.

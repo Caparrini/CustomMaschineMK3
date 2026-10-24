@@ -164,3 +164,6 @@ cython_debug/
 # Repository specific
 misc/
 settings.json
+
+# Plug-in parameter lists written by the script (PluginBanks.py)
+plugin_parameters/

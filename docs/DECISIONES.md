@@ -12,8 +12,8 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 | 001 | Base del desarrollo: CustomMaschineMK3 en modo MIDI | Aceptada | 2026-10-24 | — |
 | 002 | Modelo de ramas | Aceptada | 2026-10-24 | — |
 | 003 | Documentación del fork fuera de las contribuciones al original | Aceptada | 2026-10-24 | — |
-| 004 | Configuración específica de la banda separada del código general | Propuesta | 2026-10-24 | ver issue de configuración |
-| 005 | Bancos de parámetros para plugins de terceros | Propuesta | 2026-10-24 | ver issue de bancos VST |
+| 004 | Configuración específica de la banda separada del código general | Aceptada | 2026-10-24 | T-09 |
+| 005 | Bancos de parámetros para plugins de terceros | Aceptada | 2026-10-24 | T-03 |
 | 006 | Pantalla limitada a texto Mackie Control de 4×28 | Aceptada | 2026-10-24 | — |
 | 007 | Pruebas manuales mínimas y agrupadas | Aceptada | 2026-10-24 | T-11 |
 
@@ -43,17 +43,23 @@ Estados: **Propuesta** · **Aceptada** · **Rechazada** · **Sustituida por ADR-
 
 ## ADR-004 — Configuración específica de la banda separada del código general
 
-- **Estado:** Propuesta · **Fecha:** 2026-10-24
-- **Contexto:** los bancos de plugins propios y los mapeos de canciones no interesan al original y dificultarían aportar el resto.
-- **Propuesta:** un módulo propio (nombre por decidir) con los bancos y mapeos de la banda, cargado de forma opcional por el código general. Si no existe, el script se comporta como el original.
-- **A decidir en el issue:** formato (módulo Python o JSON), ubicación y mecanismo de carga.
+- **Estado:** Aceptada · **Fecha:** 2026-10-24 · **Issue:** T-09
+- **Contexto:** los bancos de plug-ins propios y los mapeos de canciones no interesan al original y mezclarlos con el código impediría aportarlo.
+- **Decisión:** la configuración de la banda son archivos de datos JSON en la carpeta del script, leídos de forma opcional por código general. Si no existen, el script se comporta como el original. El primero es `plugin_banks.json` (ADR-005). El código incluye un ejemplo genérico (`plugin_banks.example.json`) que sí es aportable.
+- **Alternativas descartadas:** módulo Python con la configuración (ejecuta código, más fácil de romper al editarlo a mano); ajustes en `settings.json` (lo gestiona el modo SETTINGS y no está versionado).
+- **Consecuencias:** los cambios en los JSON requieren recargar la superficie de control. Un JSON inválido se ignora con un aviso en el log, sin afectar al resto.
 
 ## ADR-005 — Bancos de parámetros para plugins de terceros
 
-- **Estado:** Propuesta · **Fecha:** 2026-10-24
-- **Contexto:** `CUSTOM_BANK_DEFINITIONS` indexa por `class_name`. Todos los plugins VST/AU comparten tipo de dispositivo en Live, por lo que la clave `class_name` no distingue Serum de Massive X. Pendiente de verificar en Live el valor exacto de `class_name` para VST2, VST3 y AU.
-- **Propuesta:** para plugins, seleccionar el banco por nombre del dispositivo o del plugin, y nombrar los parámetros de cada banco por su nombre en Live.
-- **Restricción conocida:** Live solo expone los parámetros de un plugin si su número no supera `_PluginAutoPopulateThreshold` (64 por defecto) o si se han añadido en modo Configure. Un banco que nombre un parámetro no expuesto debe degradar sin error.
+- **Estado:** Aceptada · **Fecha:** 2026-10-24 · **Issue:** T-03
+- **Contexto:** Live busca los bancos por `class_name`, y todos los plug-ins comparten `PluginDevice` (VST) o `AuPluginDevice` (AU), así que no se distingue Serum de Massive X. Valores comprobados en los scripts de Live 12 (`FaderfoxHelper`); los scripts de Live para Komplete Kontrol identifican plug-ins por el principio del nombre del dispositivo.
+- **Decisión:**
+  - `PluginBanks.py` elige el banco de un plug-in por el principio de su nombre de dispositivo, sin distinguir mayúsculas; gana el prefijo más largo.
+  - Se envuelve el `BankingInfo` de Live (`PluginAwareBankingInfo`): para un plug-in con definición, las cinco consultas de bancos ven esa definición como si fuera la de su `class_name`; para todo lo demás no cambia nada.
+  - Se instala en `CustomDeviceComponent._setup_bank`, antes del primer banco. Si falla, se registra y se mantiene el comportamiento original.
+  - Los parámetros se nombran por su nombre original en el plug-in. Para obtenerlos, al seleccionar un plug-in se escribe `plugin_parameters/<nombre>.txt` (`Config.PLUGIN_PARAMETER_DUMP`).
+- **Restricción conocida:** Live solo expone los parámetros de un plug-in si su número no supera `_PluginAutoPopulateThreshold` (64 por defecto) o si se han añadido en modo Configure. Un nombre no expuesto deja vacío ese encoder, sin error.
+- **Consecuencias:** cambiar el nombre del dispositivo en Live puede hacer que deje de coincidir. Cambios en `plugin_banks.json` requieren recargar la superficie de control.
 
 ## ADR-006 — Pantalla limitada a texto Mackie Control de 4×28
 
